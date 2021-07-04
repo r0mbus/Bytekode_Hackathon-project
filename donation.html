@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://js.instamojo.com/v1/checkout.js"></script>
+    <script>
+      /* Start client-defined Callback Handler Functions */
+      function onOpenHandler () {
+        alert('Payments Modal is Opened');
+      }
+
+      function onCloseHandler () {
+        alert('Payments Modal is Closed');
+      }
+
+      function onPaymentSuccessHandler (response) {
+        alert('Payment Success');
+        console.log('Payment Success Response', response);
+      }
+
+      function onPaymentFailureHandler (response) {
+        alert('Payment Failure');
+        console.log('Payment Failure Response', response);
+      }
+      /* End client-defined Callback Handler Functions */
+
+      /* Configuring Handlers */
+      Instamojo.configure({
+        handlers: {
+          onOpen: onOpenHandler,
+          onClose: onCloseHandler,
+          onSuccess: onPaymentSuccessHandler,
+          onFailure: onPaymentFailureHandler
+        }
+      });
+      
+      function onButtonClick() {
+        Instamojo.open('https://www.instamojo.com/@environmentalconservationandpo/');
+      }
+    </script>
+  </head>
+  <body>
+
+    
+
+    <div class="jumbotron">
+        <h1 class="display-4">Donate here</h1>
+        <p class="lead">Charities are very important as they try to counter the problems that we all face. They do so many important things to save our planet and the least that they need is some funding, therefore we have created a real donation page so that we can donate some money to the environmentalconservationandpo charity. This charity helps air and the environment in general .</p>
+        <hr class="my-4">
+        <p>Donate some money to help change the world</p>
+        <button onclick="onButtonClick()" type="button" class="btn btn-primary">Donate here</button>
+      </div>
+    
+    
+  </body>
+</html>

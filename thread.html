@@ -1,0 +1,208 @@
+<body>
+
+    <nav id="navbar">
+
+
+        <div class="brand">
+    <img src='https://images-ext-2.discordapp.net/external/qJM2C0SZUDydc9vVLS1z3M-1qu9KmNequS8doDWlXcc/https/raw.githubusercontent.com/lotofd/AgTech/main/ByteKodeHacks/AgTech.png?width=671&height=671' height="50" alt="logo" />
+    <header class="brand-header">AgTech</header>
+    </div>
+    <div class="menu">
+    <ul>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="AirPollution.html">Air Quality Diagnostic</a></li>
+    <li><a href="donation.html  ">Donate</a></li>
+    </ul>
+    </div>
+
+    </nav>
+    <div class="top-bar">
+        <h1>
+            My Forum
+        </h1>
+    </div>
+    <div class="main">
+        <div class="header">
+        </div>
+        <textarea></textarea>
+        <button>add comment</button>
+        <div class="comments">
+        </div>
+    </div>
+    <script src="data.js"></script>
+    <script>
+        var id = window.location.search.slice(1);
+        var thread = threads.find(t => t.id == id);
+        var header = document.querySelector('.header');
+        var headerHtml = `
+            <h4 class="title">
+                ${thread.title}
+            </h4>
+            <div class="bottom">
+                <p class="timestamp">
+                    ${new Date(thread.date).toLocaleString()}
+                </p>
+                <p class="comment-count">
+                    ${thread.comments.length} comments
+                </p>
+            </div>
+        `
+        header.insertAdjacentHTML('beforeend', headerHtml)
+
+        function addComment(comment) {
+            var commentHtml = `
+                <div class="comment">
+                    <div class="top-comment">
+                        <p class="user">
+                            ${comment.author}
+                        </p>
+                        <p class="comment-ts">
+                            ${new Date(comment.date).toLocaleString()}
+                        </p>
+                    </div>
+                    <div class="comment-content">
+                        ${comment.content}
+                    </div>
+                </div>
+            `
+            comments.insertAdjacentHTML('beforeend', commentHtml);
+        }
+
+        var comments = document.querySelector('.comments');
+        for (let comment of thread.comments) {
+            addComment(comment);
+        }
+
+        var btn = document.querySelector('button');
+        btn.addEventListener('click', function() {
+            var txt = document.querySelector('textarea');
+            var comment = {
+                content: txt.value,
+                date: Date.now(),
+                author: 'Aaron'
+            }
+            addComment(comment);
+            txt.value = '';
+            thread.comments.push(comment);
+            localStorage.setItem('threads', JSON.stringify(threads));
+        })
+    </script>
+    <style>
+
+        
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300&display=swap');
+
+
+        body {
+            background-image: url("https://media.discordapp.net/attachments/855854934863511553/861360847489466418/thumb-1920-458791.png?width=1193&height=671");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+ .menu{
+    text-align: right;
+    font-size: 25px;
+    margin-right: 30px;
+
+}
+.menu ul{
+    list-style: none;
+    display: inline-flex;
+    padding-left: 20px;
+}
+
+.menu ul li{
+    margin-left: 20px;
+    margin-right: 20px;
+    text-decoration: none;
+    margin-top: 30px;
+}
+
+.menu a{
+    text-decoration: none;
+    color: white;
+}
+.menu ul li a:hover{
+    background-color: white;
+    padding: 20px;
+    color: black;
+
+}
+.brand{
+    position: absolute;
+    margin-left: 40px;
+    margin-top: 13px;
+}
+.brand-header{
+    font-size: 45px;
+    margin-left: 70px;
+    margin-top: -55px;
+    color: white;
+}
+.slogan{
+    text-align: center;
+    margin-top: 250px;
+    font-size: 100px;
+    color: white;
+}
+
+
+        
+
+
+        *{
+            font-family: 'Montserrat', sans-serif;
+        }
+        body {
+            margin: 10px 60px;
+            
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        h1, h4, ol {
+            margin: 0;
+        }
+        p {
+            margin: 5px 0;
+        }
+        textarea {
+            width: 80%;
+            height: 80px;
+        }
+        button {
+            display: block;
+            margin: 10px 0;
+        }
+        .top-bar {
+            margin-top: 8%;
+            background-color: skyblue;
+            padding: 0 40px;
+        }
+        .main {
+            background-color: #F6F6EF;
+            padding: 10px 40px;
+        }
+        .comments {
+            margin: 40px 0;
+        }
+        .comment {
+            margin: 10px 0;
+        }
+        .row {
+            padding: 5px 0;
+        }
+        .bottom, .top-comment {
+            display: flex;
+            color: grey;
+            font-size: 12px;
+        }
+        .timestamp {
+            padding-right: 10px;
+        }
+        .comment-ts {
+            padding-left: 10px;
+        }
+    </style>
+</body>
